@@ -1,0 +1,178 @@
+#root {
+  padding: 2rem;
+}
+
+.navbar {
+  padding: 15px;
+  margin-bottom: 30px;
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar ul li {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.navbar a:hover {
+  text-shadow: 0 0 25px yellow;
+}
+
+.navbar a:active {
+  color:yellow;
+  text-shadow: 0 0 25px rgb(255, 255, 227);
+}
+
+a{
+  color: rgb(0, 68, 255);
+  text-decoration: none;
+}
+
+a:hover{
+  color: rgb(0, 162, 255);
+}
+
+a:active{
+  color: yellow;
+}
+
+.navbar a {
+  color: gold;
+  font-size: 1.2em;
+  margin:10px 15px 10px 15px;
+}
+
+button a{
+  color:black;
+}
+
+.account{
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  color: yellow;
+  border: 3px solid ;
+  clip-path: polygon(
+    0% 5%,5% 0%, 
+    95% 0%,100% 5%, 
+    100% 95%,95% 100%, 
+    5% 100%,0% 95%
+  );
+}
+
+.content{
+  background-color: rgb(0, 72, 0);
+  padding: 50px;
+  font-size: 1em;
+  clip-path: polygon(
+    0% 5%,5% 0%, 
+    95% 0%,100% 5%, 
+    100% 95%,95% 100%, 
+    5% 100%,0% 95%
+  );
+}
+
+.games-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px; 
+  margin-top: 50px;
+  padding: 0;
+  list-style: none;
+}
+
+.games-container img{
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.games-container li{
+  flex: 1 1 300px;
+  padding: 2em;
+  background-color: green;
+  color: yellow;
+  clip-path: polygon(
+    0% 5%,5% 0%, 
+    95% 0%,100% 5%, 
+    100% 95%,95% 100%, 
+    5% 100%,0% 95%
+  );
+  border: 3px solid ;
+  max-width: 30%;
+}
+
+h1{
+  text-align: center;
+}
+
+.guide h2{
+  color:gold;
+  text-decoration: none;
+}
+
+form{
+  padding: 10px;
+}
+
+form input{
+  padding: 5px;
+  background-color:gold;
+  height: 15px;
+  font-size: 1em;
+}
+
+form input, form button{
+  margin: 10px;
+}
+
+.poll-option {
+  margin: 10px 0;
+}
+
+.poll-bar-container {
+  width: 100%;
+  background-color: #333;
+  border-radius: 5px;
+  overflow: hidden;
+  height: 25px;
+}
+
+.poll-bar {
+  background-color: #ffcc00;
+  height: 100%;
+  text-align: right;
+  padding-right: 5px;
+  line-height: 25px;
+  color: black;
+  font-weight: bold;
+  transition: width 0.3s ease;
+}
+
+.pagination{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 30px;
+}
+
+.pagination button, .search-bar button{
+  width: 150px;
+}
+
+.pagination button:hover, .search-bar button:hover, .account button:hover{
+  color: rgb(0, 68, 255);
+}
+
+.pagination button:active, .search-bar button:active, .account button:active{
+  color: yellow;
+}

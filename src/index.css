@@ -1,0 +1,70 @@
+a {
+  font-weight: 500;
+  color: black;
+  text-decoration: none;
+}
+
+body {
+  margin: 0;
+  font-family: 'Retro Gaming', monospace;
+  color: gold;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: black;
+}
+
+h1 {
+  font-size: 5em;
+  line-height: 1.1;
+  color:gold;
+  -webkit-text-stroke: 1.5px yellow;
+  text-shadow: 0px 0px 10px rgba(255, 255, 0, 0.5);
+}
+
+@font-face {
+  font-family: "Retro Gaming";
+  src: url("/fonts/retro_gaming.ttf") format("truetype");
+}
+
+ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  border: 3px solid transparent;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  padding: 5px 10px 10px 10px;
+  background-color: yellow;
+  clip-path: polygon(
+    0% 15%,5% 0%, 
+    95% 0%,100% 15%, 
+    100% 85%,95% 100%, 
+    5% 100%,0% 85%
+  );
+}
+
+button:hover {
+  border-color: rgb(0, 68, 255);
+}
+
+button:hover a{
+  color:rgb(0, 68, 255);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+button:active{
+  background-color: rgb(0, 68, 255);
+}
+
+button:active a{
+  color: yellow;
+}

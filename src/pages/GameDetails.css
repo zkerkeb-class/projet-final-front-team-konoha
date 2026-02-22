@@ -1,0 +1,31 @@
+#game-details {
+  text-align: left;
+}
+
+img{
+  width: 100%;
+}
+
+.details{
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.details ul{
+  list-style: square;
+}
+
+.text {
+  font-family: Verdana, Tahoma, sans-serif;
+  background-color: gold;
+  color:black;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 30px;
+  clip-path: polygon(
+    0% 5%,5% 0%, 
+    95% 0%,100% 5%, 
+    100% 95%,95% 100%, 
+    5% 100%,0% 95%
+  );
+}
