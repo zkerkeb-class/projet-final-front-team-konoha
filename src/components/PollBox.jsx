@@ -1,24 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { votePoll } from "../api/api.js";
 
-const PollBox = ({ poll, onVote }) => {
+const PollBox = ({ poll, currentUserId, onVote }) => { //ajout de currentUserId
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [voted, setVoted] = useState(false);
   const [options, setOptions] = useState(poll.options);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  //nouveau
+  useEffect(() => {
+    if (poll.voters.includes(currentUserId)) setVoted(true);
+  }, [poll, currentUserId]);
+
   const totalVotes = options.reduce((sum, opt) => sum + opt.votes, 0);
 
   const handleSubmitVote = async () => {
-    if (selectedIndex === null || voted) return;
+    if (selectedIndex === null || voted || loading) return;
+
+    setLoading(true);
+    setError(null);
 
     try {
-      await votePoll(poll._id, selectedIndex);
-      const updatedOptions = [...options];
-      updatedOptions[selectedIndex].votes += 1;
-      setOptions(updatedOptions);
+      const updatedPoll = await votePoll(poll._id, selectedIndex); 
+      setOptions(updatedPoll.options);
       setVoted(true);
       if (onVote) onVote();
     } catch (error) {
-      console.error("Erreur lors du vote :", error);
+      setError(error.message);
+    }finally{ 
+      setLoading(false);
     }
   };
 
@@ -27,14 +38,14 @@ const PollBox = ({ poll, onVote }) => {
       <h2>{poll.title}</h2>
       <p>{poll.question}</p>
       {options.map((opt, index) => {
-        const percent = totalVotes ? (opt.votes / totalVotes) * 100 : 0;
+        const percent = totalVotes > 0 ? Math.round((opt.votes / totalVotes) * 100) : 0;
 
         return (
           <div key={index} className="poll-option">
             <label>
               <input
                 type="checkbox"
-                disabled={voted}
+                disabled={voted ||loading}
                 checked={selectedIndex === index}
                 onChange={() => setSelectedIndex(index)}
               />
@@ -51,8 +62,8 @@ const PollBox = ({ poll, onVote }) => {
         );
       })}
       {!voted && (
-        <button className="vote-button" disabled={selectedIndex === null} onClick={handleSubmitVote}>
-          Voter
+        <button className="vote-button" disabled={selectedIndex === null ||loading} onClick={handleSubmitVote}>
+          {loading ? "Vote en cours..." : "Voter"}
         </button>
       )}
     </div>

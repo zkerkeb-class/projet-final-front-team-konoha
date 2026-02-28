@@ -82,17 +82,31 @@ export const searchPolls = async (title) => {
 
 export const votePoll = async (pollId, optionIndex) => {
   const token = localStorage.getItem("token");
+  console.log("Token : ", localStorage.getItem("token"));
+  if (!token) throw new Error("Utilisateur non authentifié");
+
   try {
-    const res = await fetch(`http://localhost:3000/api/polls/${pollId}/vote`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
-      },
-      body: JSON.stringify({ optionIndex })
-    });
-    return await res.json();
+    const res = await fetch(
+      `http://localhost:3000/api/sondages/${pollId}/vote`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ optionIndex }),
+      }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.message || "Erreur lors du vote");
+    }
+
+    return data;
   } catch (error) {
-    console.error(error);
+    console.error("votePoll error:", error);
+    throw error;
   }
 };

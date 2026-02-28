@@ -1,6 +1,7 @@
 import {Link, useParams} from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { formatDate } from "../utils/formatDate.js";
+import ReactMarkdown from "react-markdown";
 import './GameDetails.css';
 
 const GameDetails = () => {
@@ -29,7 +30,7 @@ const GameDetails = () => {
             <div id='game-details'>
                 <h2>{game.title}</h2>
                 <h2><small><i>({game.series})</i></small></h2>
-                <img src={game.image} alt={game.title} />
+                <div className='image'><img src={game.image} alt={game.title} /></div>
                 <div className='details'>
                     <ul>Date de sortie :
                         <li><u>Amérique du Nord</u> : {formatDate(game.releaseDate?.america)}</li>
@@ -43,7 +44,7 @@ const GameDetails = () => {
                 </div>
                 <div className='text'>
                     {game.description.map((paragraph,index) => (
-                        <p key={index}>{paragraph}</p>
+                        <ReactMarkdown key={index}>{paragraph}</ReactMarkdown>
                     ))}
                 </div>
             </div>
