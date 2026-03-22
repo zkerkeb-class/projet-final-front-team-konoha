@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import { votePoll } from "../api/api.js";
+import ReactMarkdown from "react-markdown";
 
-const PollBox = ({ poll, currentUserId, onVote }) => { //ajout de currentUserId
+const PollBox = ({ poll, currentUserId, onVote }) => { 
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [voted, setVoted] = useState(false);
   const [options, setOptions] = useState(poll.options);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  //nouveau
   useEffect(() => {
-    if (poll.voters.includes(currentUserId)) setVoted(true);
+    if (poll.voters?.includes(currentUserId)) setVoted(true);
   }, [poll, currentUserId]);
 
   const totalVotes = options.reduce((sum, opt) => sum + opt.votes, 0);
@@ -44,12 +44,13 @@ const PollBox = ({ poll, currentUserId, onVote }) => { //ajout de currentUserId
           <div key={index} className="poll-option">
             <label>
               <input
-                type="checkbox"
+                type="radio"
+                name = {`poll-${poll._id}`}
                 disabled={voted ||loading}
                 checked={selectedIndex === index}
                 onChange={() => setSelectedIndex(index)}
               />
-              {opt.text}
+              <ReactMarkdown components={{ p: "span" }}>{opt.text}</ReactMarkdown>
             </label>
             {voted && (
                 <div className="poll-bar-container">
@@ -65,6 +66,11 @@ const PollBox = ({ poll, currentUserId, onVote }) => { //ajout de currentUserId
         <button className="vote-button" disabled={selectedIndex === null ||loading} onClick={handleSubmitVote}>
           {loading ? "Vote en cours..." : "Voter"}
         </button>
+      )}
+      {error && (
+        <div className="poll-error">
+          {error}
+        </div>
       )}
     </div>
   );

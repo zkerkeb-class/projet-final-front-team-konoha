@@ -120,8 +120,17 @@ h1{
   text-decoration: none;
 }
 
+.anecdote{
+  text-align: justify;
+}
+
+.anecdote > :not(h2){
+  font-family: Verdana, Tahoma, sans-serif;
+}
+
 form{
   padding: 10px;
+  background-color: green;
 }
 
 form input{
@@ -156,6 +165,11 @@ form input, form button{
   color: black;
   font-weight: bold;
   transition: width 0.3s ease;
+}
+
+.poll-error{
+  margin: 10px;
+  color: red;
 }
 
 .pagination{

@@ -38,7 +38,7 @@ const Guides = () => {
       <h1>Guides</h1>
       <SearchBar value={search} onChange={setSearch} onSubmit={handleSearch} placeholder="Rechercher par titre"/>
       {guides.map((guide) => (
-        <GuideContent key={guide._id} guide={guide} />
+        <GuideContent key={guide.id} guide={guide} />
       ))}
       <div className="pagination">
       <button disabled={page === 1} onClick={() => setPage(page - 1)}>

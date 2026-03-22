@@ -13,6 +13,11 @@ body {
   background-color: black;
 }
 
+.intro{
+  text-align: center;
+  font-size: 1.25em;
+}
+
 h1 {
   font-size: 5em;
   line-height: 1.1;
@@ -67,4 +72,15 @@ button:active{
 
 button:active a{
   color: yellow;
+}
+
+footer{
+  margin-top: 100px;
+  margin-left: 100px;
+  
+}
+
+footer a, form a{
+  color: gold;
+  font-family: Verdana, Tahoma, sans-serif;
 }

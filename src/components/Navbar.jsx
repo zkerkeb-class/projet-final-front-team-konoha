@@ -1,10 +1,21 @@
 import { NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const Navbar = () => {
-  const token = localStorage.getItem("token");
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const handleLogout = () => {
     localStorage.removeItem("token");
+    setToken(null);
   };
+
+  useEffect(() => {
+    const syncToken = () => {
+      setToken(localStorage.getItem("token"));
+    };
+
+    window.addEventListener("storage", syncToken);
+    return () => window.removeEventListener("storage", syncToken);
+  }, []);
 
   return (
     <nav className="navbar">

@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 const GuideContent = ({guide}) =>{
     return(
         <div className="guide">
-            <Link to={`/guides/${guide._id}`}><h2><ReactMarkdown>{guide.title}</ReactMarkdown></h2></Link>
+            <Link to={`/guides/${guide.id}`}><h2><ReactMarkdown>{guide.title}</ReactMarkdown></h2></Link>
         </div>
     )
 }

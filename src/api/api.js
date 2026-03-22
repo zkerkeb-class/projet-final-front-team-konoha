@@ -1,3 +1,5 @@
+import {logout} from '../utils/auth.js'
+
 const API_URL = "http://localhost:3000/api";
 
 export const fetchGames = async (page = 1) => {
@@ -67,9 +69,7 @@ export const searchAnecdotes = async (title) => {
 
 export const searchPolls = async (title) => {
   try {
-    const response = await fetch(
-      `${API_URL}/sondages/search?title=${encodeURIComponent(title)}`
-    );
+    const response = await fetch(`${API_URL}/sondages/search?title=${encodeURIComponent(title)}`);
     if (!response.ok) {
       throw new Error("Erreur lors de la recherche");
     }
@@ -83,11 +83,13 @@ export const searchPolls = async (title) => {
 export const votePoll = async (pollId, optionIndex) => {
   const token = localStorage.getItem("token");
   console.log("Token : ", localStorage.getItem("token"));
-  if (!token) throw new Error("Utilisateur non authentifié");
+  if (!token){
+    logout();
+    return;
+  }
 
   try {
-    const res = await fetch(
-      `http://localhost:3000/api/sondages/${pollId}/vote`,
+    const res = await fetch(`http://localhost:3000/api/sondages/${pollId}/vote`,
       {
         method: "POST",
         headers: {
@@ -98,12 +100,13 @@ export const votePoll = async (pollId, optionIndex) => {
       }
     );
 
-    const data = await res.json();
-
-    if (!res.ok) {
-      throw new Error(data.message || "Erreur lors du vote");
+    if(res.status === 401){
+      logout();
+      return;
     }
 
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || "Erreur lors du vote");
     return data;
   } catch (error) {
     console.error("votePoll error:", error);

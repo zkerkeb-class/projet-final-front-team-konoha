@@ -1,6 +1,7 @@
 import {Link, useParams} from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { formatDate } from "../utils/formatDate.js";
+import { useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import './GameDetails.css';
 
@@ -8,12 +9,11 @@ const GameDetails = () => {
     const {id} = useParams(); 
     const [game, setGame] = useState(null);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchGame = async () => {
-        const response = await fetch(
-            `http://localhost:3000/api/games/${id}`
-        );
+        const response = await fetch(`http://localhost:3000/api/games/${id}`);
         const data = await response.json();
         setGame(data);
         setLoading(false);
@@ -28,8 +28,8 @@ const GameDetails = () => {
     return(
         <>
             <div id='game-details'>
+                <h2><small><i>{game.series}</i></small></h2>
                 <h2>{game.title}</h2>
-                <h2><small><i>({game.series})</i></small></h2>
                 <div className='image'><img src={game.image} alt={game.title} /></div>
                 <div className='details'>
                     <ul>Date de sortie :
@@ -44,11 +44,13 @@ const GameDetails = () => {
                 </div>
                 <div className='text'>
                     {game.description.map((paragraph,index) => (
-                        <ReactMarkdown key={index}>{paragraph}</ReactMarkdown>
+                        <ReactMarkdown key={index} components={{ a: ({ node, ...props }) => (<Link to={props.href}>{props.children}</Link>)}}>
+                            {paragraph}
+                        </ReactMarkdown>
                     ))}
                 </div>
             </div>
-            <button><Link to="/">Retour à la page d'accueil</Link></button>
+            <button onClick={() => navigate("/")}>Retour à la page d'accueil</button>
         </>
     );
 }

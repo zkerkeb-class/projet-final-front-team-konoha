@@ -1,11 +1,13 @@
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 
 const GuideDetails = () => {
     const { id } = useParams();
     const [guide, setGuide] = useState(null);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchGuide = async () => {
@@ -33,14 +35,14 @@ const GuideDetails = () => {
                 <div className='text'>
                     {guide.content.map((item, index) => 
                         item.type === "text" ? (
-                            <ReactMarkdown key={index}>
+                            <ReactMarkdown key={index} components={{ a: ({ node, ...props }) => (<Link to={props.href}>{props.children}</Link>)}}>
                                 {item.content}
                             </ReactMarkdown>
-                        ) : null
+                        ) : <img key={index} src={item.src} alt={item.alt}/>
                     )}
                 </div>
             </div>
-            <button><Link to="/guides">Retour à la page d'accueil</Link></button>
+            <button onClick={() => navigate("/guides")}>Retour à la page des guides</button>
         </>
     );
 }

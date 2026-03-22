@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import ProtectedRoute from './components/ProtectedRoute'
 import Home from './pages/Home'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 import GameDetails from './pages/GameDetails'
 import Guides from './pages/Guides'
 import GuideDetails from './pages/GuideDetails'
@@ -30,6 +31,7 @@ function App() {
         }
         />
       </Routes>
+      <Footer/>
     </div>
   );
 }

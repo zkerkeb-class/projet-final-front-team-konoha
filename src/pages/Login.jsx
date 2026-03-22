@@ -26,6 +26,7 @@ const Login = () => {
       }
 
       localStorage.setItem("token", data.token);
+      window.dispatchEvent(new Event("storage"));
       navigate("/");
     }
     catch{

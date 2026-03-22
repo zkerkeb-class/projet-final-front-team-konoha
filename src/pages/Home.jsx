@@ -1,5 +1,4 @@
 import { useState,useEffect } from 'react';
-import { fetchGames, searchGames } from '../api/api.js';
 import GameBox from '../components/GameBox.jsx';
 
 function Home() {
@@ -45,7 +44,13 @@ function Home() {
   return (
     <>
     <h1>Le Bureau des Gamers</h1>
+    <div className='intro'>
+      <p>Bienvenue au Bureau des Gamers !</p>
+      <p>Ici, tu peux trouver des informations sur les jeux vidéo, leur histoire et leur gameplay. Tu peux aussi découvrir des guides et des astuces, ainsi que des anecdotes et des sondages. Donc, si tu veux faire partie de la communauté  et pouvoir voter aux sondages, n’hésite pas à créer ton compte !</p>
+      <p>Bonne visite !</p>
+    </div>
     <form onSubmit={handleSearch} className="search-bar">
+      <h3> Filtres de recherche :</h3>
       <input
         type="text"
         placeholder="Titre"
